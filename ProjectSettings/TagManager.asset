@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Background
+  - Player
+  - Enemies
+  - Patrolling Colliders
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 4115349843
+    locked: 0
+  - name: Background (structure)
+    uniqueID: 3889133579
+    locked: 0
+  - name: Decorations A
+    uniqueID: 464332981
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 715710457
+    locked: 0
+  - name: Decorations B
+    uniqueID: 1129795923
+    locked: 0
+  - name: Bubble Shield
+    uniqueID: 1317943785
+    locked: 0
+  - name: Vehicles
+    uniqueID: 2591496269
+    locked: 0
