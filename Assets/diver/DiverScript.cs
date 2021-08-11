@@ -63,6 +63,7 @@ public class DiverScript: MonoBehaviour
       rigidbodyComponent = GetComponent<Rigidbody2D>();
       playerAnimation = GetComponent<Animator>();
       collider = GetComponent<Collider2D>();
+      //myParticleSystem = GetComponent<ParticleSystem>();
     }
 
     void Update() {

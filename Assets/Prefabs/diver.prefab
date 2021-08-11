@@ -202,7 +202,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   healthBar: {fileID: 0}
+  o2Bar: {fileID: 0}
   Bubble: {fileID: 2762537467118936627}
+  myParticleSystem: {fileID: 0}
 --- !u!1 &2983291806401569029
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +304,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1317943785
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a66051125c0d84481b290916b46fe610, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
