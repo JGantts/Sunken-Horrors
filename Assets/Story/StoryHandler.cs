@@ -5,9 +5,17 @@ using UnityEngine;
 
 public enum ResetLevel {
     Start,
-    One,
-    Two,
-    Three
+    KelseyReldret,
+    HenryJinzandi,
+    SusanaTevzenguve,
+    ElissaMai,
+    LancelotMoonglade,
+    JusticeVavred,
+    WibaTobolbelze,
+    RadclyffeOdegoba,
+    DevannaStibetvuri,
+    JannisGelmodunte,
+    RolloRondubroi
 }
 
 [Serializable]

@@ -59,10 +59,19 @@ public class DiverScript: MonoBehaviour
 
     public ParticleSystem myParticleSystem;
 
+    public AudioClip death;
+    public AudioClip hurt;
+    public AudioClip jump;
+    public AudioClip land;
+    public AudioClip pushDown;
+
+    private AudioSource myAudioSource;
+
     void Start() {
       rigidbodyComponent = GetComponent<Rigidbody2D>();
       playerAnimation = GetComponent<Animator>();
       collider = GetComponent<Collider2D>();
+      myAudioSource = GetComponent<AudioSource>();
       //myParticleSystem = GetComponent<ParticleSystem>();
     }
 
@@ -81,7 +90,7 @@ public class DiverScript: MonoBehaviour
           Bubble.color = Color.clear;
         }
         if (!m_IsDead && Time.timeScale != 0) {
-        healthBar.value = health/100f;
+            healthBar.value = health/100f;
             o2Bar.value = oxygen/100f;
 
             var emitter = myParticleSystem.emission;
@@ -121,16 +130,26 @@ public class DiverScript: MonoBehaviour
               percentLeft -= percentPerRound;
             }
 
-            m_IsTouchingGround = false;
+            //m_IsTouchingGround = false;
+            bool isTouchingGroundNew = false;
             foreach(Vector3 point in rayOrigins) {
               Debug.DrawRay(point, Vector2.down, Color.green);
               RaycastHit2D hit = Physics2D.Raycast(point, Vector2.down, 0.03f);
 
               if (hit.collider != null) {
-                m_IsTouchingGround = true;
+                isTouchingGroundNew = true;
                 break;
               }
             }
+
+            //Debug.Log($"m_IsTouchingGround: {m_IsTouchingGround} | isTouchingGroundNew: {isTouchingGroundNew}");
+
+            if (!m_IsTouchingGround && isTouchingGroundNew) {
+                Debug.Log("Lands");
+                myAudioSource.PlayOneShot(land, 1f);
+            }
+
+            m_IsTouchingGround = isTouchingGroundNew;
 
             //Debug.DrawRay(bottomLeft, Vector2.down, Color.green);
             //Debug.DrawRay(bottomRight, Vector2.down, Color.green);
@@ -173,6 +192,7 @@ public class DiverScript: MonoBehaviour
             if (Input.GetButtonDown("Jump")) {
                 if (m_IsTouchingGround) {
                     //if (stamina >= 10) {
+                        myAudioSource.PlayOneShot(jump, 1f);
                         rigidbodyComponent.gravityScale = 0.3f;
                         movementY = 1 * speedJump;
                         //stamina -= 10;
@@ -232,6 +252,7 @@ public class DiverScript: MonoBehaviour
             rigidbodyComponent.drag = 0;
         }
         if (!m_IsDead && (health <= 0 || oxygen <= 0)) {
+            myAudioSource.PlayOneShot(death, 1f);
             m_IsDead = true;
             playerAnimation.SetBool("IsDead", true);
             m_deathTime = Time.timeSinceLevelLoad;
@@ -246,6 +267,7 @@ public class DiverScript: MonoBehaviour
 
     public void Attacked() {
         if (!isInDamageCooldown && !m_isInBubble) {
+            myAudioSource.PlayOneShot(hurt, 1f);
             playerAnimation.SetBool("TookDamage", true);
             health -= (25 * UnityEngine.Random.value) + 25;
             m_isInDamageCooldown = true;
