@@ -38,4 +38,4 @@ sysinfo.txt
 
 # Gantt42
 *.log
-#.DS_Store
+*.DS_Store
