@@ -67,12 +67,24 @@ public class DiverScript: MonoBehaviour
     }
 
     void Update() {
+
+
         if (isInBubble) {
           Bubble.color = Color.white;
         } else {
           Bubble.color = Color.clear;
         }
         if (!m_IsDead) {
+        healthBar.value = health/100f;
+            o2Bar.value = oxygen/100f;
+
+            var emitter = myParticleSystem.emission;
+            emitter.rateOverTime = ((1-o2Bar.value)*1.2f - 0.2f) * 20f;
+
+            if (playerAnimation.GetCurrentAnimatorClipInfo(0)[0].clip.name == "diver_wake") {
+              return;
+            }
+
             Vector3 center = collider.bounds.center;
             Vector3 extents = collider.bounds.extents;
             Vector3 bottomLeft = new Vector3(
@@ -122,11 +134,6 @@ public class DiverScript: MonoBehaviour
             /*if (hitLeft.collider != null) {
               Direction = 1;
             }*/
-            healthBar.value = health/100f;
-            o2Bar.value = oxygen/100f;
-
-            var emitter = myParticleSystem.emission;
-            emitter.rateOverTime = (1-o2Bar.value) * 20;
 
             playerAnimation.SetFloat("AbsInputHorizontal", Mathf.Abs(Input.GetAxis("Horizontal")));
             playerAnimation.SetBool("InputJump", Input.GetButtonDown("Jump"));
@@ -167,8 +174,8 @@ public class DiverScript: MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp("Jump") || (rigidbodyComponent.velocity.y < -0.0001 && rigidbodyComponent.gravityScale != 2f)) {
-                rigidbodyComponent.gravityScale = 2f;
+            if (Input.GetButtonUp("Jump") || (rigidbodyComponent.velocity.y < -0.0001 && rigidbodyComponent.gravityScale != 1.7f)) {
+                rigidbodyComponent.gravityScale = 1.7f;
             }
 
             movement = new Vector2(
@@ -195,6 +202,10 @@ public class DiverScript: MonoBehaviour
             );
         } else {
             if (Input.GetButtonDown("Jump") && (m_deathTime + 3f) < Time.timeSinceLevelLoad) {
+                SceneManager.LoadScene("Retry");
+            }
+
+            if ((m_deathTime + 6f) < Time.timeSinceLevelLoad) {
                 SceneManager.LoadScene("Retry");
             }
 
@@ -230,7 +241,7 @@ public class DiverScript: MonoBehaviour
     public void Attacked() {
         if (!isInDamageCooldown && !m_isInBubble) {
             playerAnimation.SetBool("TookDamage", true);
-            health -= (10 * UnityEngine.Random.value) + 10;
+            health -= (25 * UnityEngine.Random.value) + 25;
             m_isInDamageCooldown = true;
         }
     }
@@ -242,6 +253,10 @@ public class DiverScript: MonoBehaviour
 
     public void O2Tank() {
         oxygen = 100f;
+    }
+
+    public void HeartCollectable() {
+        HeartItem();
     }
 
     public void HeartItem() {

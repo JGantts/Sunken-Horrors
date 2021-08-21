@@ -17,9 +17,9 @@ public class HeartItemScript : MonoBehaviour
   void Update()
   {
       if (m_MyRigidbody2D.velocity.y < -5) {
-          Destroy(gameObject);
           DiverScript playerScript = Player.GetComponent<DiverScript>();
           playerScript.HeartItem();
+              Destroy(gameObject);
       }
   }
 }

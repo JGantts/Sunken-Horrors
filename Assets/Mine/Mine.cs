@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    bool m_IsExplode;
+    bool m_IsExplode = false;
 
     private Animator myAnimation;
 
