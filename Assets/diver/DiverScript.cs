@@ -19,7 +19,7 @@ public class DiverScript: MonoBehaviour
 
     public Slider healthBar;
     public Slider o2Bar;
-
+    public Image paragraph;
 
     public SpriteRenderer Bubble;
 
@@ -68,13 +68,19 @@ public class DiverScript: MonoBehaviour
 
     void Update() {
 
+        if (StoryHandler.The.displayingStory) {
+            if (Input.anyKey && (StoryHandler.The.displayedStoryTime + 1.5f) < Time.realtimeSinceStartup) {
+                paragraph.color = Color.clear;
+                Time.timeScale = 1;
+            }
+        }
 
         if (isInBubble) {
           Bubble.color = Color.white;
         } else {
           Bubble.color = Color.clear;
         }
-        if (!m_IsDead) {
+        if (!m_IsDead && Time.timeScale != 0) {
         healthBar.value = health/100f;
             o2Bar.value = oxygen/100f;
 
@@ -200,7 +206,7 @@ public class DiverScript: MonoBehaviour
               movement.x,
               newYVelo
             );
-        } else {
+        } else if (m_IsDead) {
             if (Input.GetButtonDown("Jump") && (m_deathTime + 3f) < Time.timeSinceLevelLoad) {
                 SceneManager.LoadScene("Retry");
             }

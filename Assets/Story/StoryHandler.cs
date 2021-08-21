@@ -16,8 +16,16 @@ public class LevelAndPage {
     public PageObject page;
 }
 
+[Serializable]
+public class LevelAndSprite {
+    public ResetLevel level;
+    public Sprite sprite;
+}
+
 public class StoryHandler {
     public static StoryHandler The = new StoryHandler();
 
     public ResetLevel level = ResetLevel.Start;
+    public bool displayingStory = false;
+    public float displayedStoryTime = 0f;
 }
