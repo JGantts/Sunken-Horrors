@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b603c8cd1b7164c48ba2c980ab550c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  o2TankPop: {fileID: 8300000, guid: f5e6dff6be932402f823b627d1a5983b, type: 3}

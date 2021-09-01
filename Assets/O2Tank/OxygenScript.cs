@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class OxygenScript : MonoBehaviour
 {
-  DiverScript playerScript;
-
-  // Start is called before the first frame update
-  void Start() {
-  }
-
-  // Update is called once per frame
-  void Update() {
-
-  }
+  public AudioClip o2TankPop;
 
   public void OnTriggerEnter2D(Collider2D collider) {
       if (collider.name == "diver") {
+        AudioSource.PlayClipAtPoint(
+            o2TankPop,
+            GetComponent<Transform>().position,
+            3f
+          );
           GameObject player = collider.gameObject;
           DiverScript playerScript = player.GetComponent<DiverScript>();
           playerScript.O2Tank();

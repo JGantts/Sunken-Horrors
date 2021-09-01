@@ -10,6 +10,8 @@ public class Chest : MonoBehaviour
     public Rigidbody2D HeartSprite;
     public Rigidbody2D BubbleShieldSprite;
 
+    public AudioClip ChestOpen;
+
     Transform m_MyTransform;
 
     bool m_IsOpen = false;
@@ -18,11 +20,6 @@ public class Chest : MonoBehaviour
     void Start() {
       myAnimation = GetComponent<Animator>();
       m_MyTransform = GetComponent<Transform>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     public void OnTriggerEnter2D(Collider2D collider) {
@@ -36,6 +33,11 @@ public class Chest : MonoBehaviour
     private void Open(GameObject player) {
         myAnimation.SetBool("IsOpen", true);
         m_IsOpen = true;
+        AudioSource.PlayClipAtPoint(
+            ChestOpen,
+            m_MyTransform.position,
+            1f
+          );
         if (Random.value < 0.5) {
             RevealHeart(player);
         } else {

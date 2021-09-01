@@ -145,7 +145,6 @@ public class DiverScript: MonoBehaviour
             //Debug.Log($"m_IsTouchingGround: {m_IsTouchingGround} | isTouchingGroundNew: {isTouchingGroundNew}");
 
             if (!m_IsTouchingGround && isTouchingGroundNew) {
-                Debug.Log("Lands");
                 myAudioSource.PlayOneShot(land, 1f);
             }
 
@@ -192,7 +191,7 @@ public class DiverScript: MonoBehaviour
             if (Input.GetButtonDown("Jump")) {
                 if (m_IsTouchingGround) {
                     //if (stamina >= 10) {
-                        myAudioSource.PlayOneShot(jump, 1f);
+                        myAudioSource.PlayOneShot(jump, 0.7f);
                         rigidbodyComponent.gravityScale = 0.3f;
                         movementY = 1 * speedJump;
                         //stamina -= 10;
@@ -266,7 +265,7 @@ public class DiverScript: MonoBehaviour
     }
 
     public void Attacked() {
-        if (!isInDamageCooldown && !m_isInBubble) {
+        if (!isInDamageCooldown && !m_isInBubble && !m_IsDead) {
             myAudioSource.PlayOneShot(hurt, 1f);
             playerAnimation.SetBool("TookDamage", true);
             health -= (25 * UnityEngine.Random.value) + 25;
