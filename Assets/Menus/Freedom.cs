@@ -7,7 +7,7 @@ public class Freedom : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Jump") && Time.timeSinceLevelLoad > 3f) {
               SceneManager.LoadScene("Start");
         }
     }
